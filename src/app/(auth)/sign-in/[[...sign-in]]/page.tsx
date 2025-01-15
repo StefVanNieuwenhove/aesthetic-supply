@@ -1,20 +1,25 @@
 'use client';
 
 import { signInSchema } from '@/lib/validation';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Box,
   Button,
   Divider,
   FormControl,
   FormHelperText,
+  IconButton,
   TextField,
   Typography,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const SignInPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
   const {
     values,
@@ -53,7 +58,6 @@ const SignInPage = () => {
           flexDirection: 'column',
           gap: 3,
           width: '40%',
-          //height: '50%',
           border: '1px solid black',
           borderRadius: 2,
           padding: 4,
@@ -95,13 +99,22 @@ const SignInPage = () => {
             required
             variant='standard'
             label='Password'
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.password && Boolean(errors.password)}
             helperText={touched.password && errors.password}
             placeholder='********'
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                ),
+              },
+            }}
           />
           <FormHelperText sx={{ display: 'flex', justifyContent: 'end' }}>
             <Link href={'/forgot-password'}>Wachtwoord vergeten?</Link>
@@ -116,6 +129,9 @@ const SignInPage = () => {
             Login
           </Button>
         </Box>
+        <Typography variant='body2' color='textSecondary' align='left'>
+          Nog geen account? <Link href={'/sign-up'}>Registreer</Link>
+        </Typography>
       </Box>
     </main>
   );
