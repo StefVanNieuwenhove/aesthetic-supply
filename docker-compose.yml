@@ -3,7 +3,7 @@ services:
   scouts-db:
     image: postgres
     restart: always
-    container_name: template-db-container
+    container_name: aesthetic-supply-db
     ports:
       - 5432:5432
     environment:
