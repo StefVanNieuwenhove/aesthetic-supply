@@ -3,7 +3,7 @@ import { Breadcrumbs, Link } from '@mui/material';
 const BreadCrumbs = () => {
   return (
     <>
-      <Breadcrumbs aria-label='breadcrumb' sx={{ color: 'white' }}>
+      <Breadcrumbs aria-label='breadcrumb'>
         <Link underline='hover' color='inherit'>
           Dashboard
         </Link>

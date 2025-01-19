@@ -57,7 +57,6 @@ const SignInPage = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
-          width: '40%',
           border: '1px solid black',
           borderRadius: 2,
           padding: 4,

@@ -1,6 +1,5 @@
 import { AppBar, Avatar, Badge, Box, Toolbar, Typography } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
-import BreadCrumbs from './BreadCrumbs';
 import { SidebarTrigger } from './Sidebar';
 import { NAVBAR_HEIGHT } from '@/lib/utils';
 
@@ -21,7 +20,6 @@ const Navbar = () => {
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
             <SidebarTrigger />
-            <BreadCrumbs />
           </Box>
           <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
             <Badge

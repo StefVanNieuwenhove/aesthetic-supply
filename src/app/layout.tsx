@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ClerkProvider } from '@clerk/nextjs';
 import { CssBaseline } from '@mui/material';
+import { ScreenSize } from '@/components/ui';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,6 +33,7 @@ export default function RootLayout({
           <AppRouterCacheProvider>
             <CssBaseline />
             {children}
+            <ScreenSize />
           </AppRouterCacheProvider>
         </body>
       </html>

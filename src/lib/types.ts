@@ -6,3 +6,8 @@ export type Link = {
   icon?: ReactNode;
   children?: Link[];
 };
+
+export type StepData = {
+  label: string;
+  content: ReactNode;
+};
