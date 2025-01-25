@@ -15,7 +15,7 @@ const Navbar = () => {
           zIndex: 100,
           top: 0,
           height: `${NAVBAR_HEIGHT}`,
-          backdropFilter: 'blur(10px)',
+          backdropFilter: 'blur(20px)',
         }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>

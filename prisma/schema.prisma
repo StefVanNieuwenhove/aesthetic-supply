@@ -15,6 +15,26 @@ datasource db {
 
 model User {
   id    String  @id @default(uuid())
-  email String  @unique
   name  String
+  email String  @unique
+  role  Role    @default(MEMBER)
+  orgainzations Organization[]
+}
+
+model Organization {
+  id   String  @id @default(uuid())
+  name String @unique
+  companyNumber String @unique
+  rizivNumber String @unique
+  address String
+  city String
+  zipcode String
+  phone String?
+  bankAccount String?
+  users User[]
+}
+
+enum Role {
+  ADMIN
+  MEMBER
 }

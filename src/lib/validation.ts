@@ -1,39 +1,36 @@
 import * as yup from 'yup';
+import { COMPANY_NUMBER_REGEX, ZIP_CODE_REGEX, PASSWORD_REGEX } from './utils';
 
 const email = yup.string().email('Gelieve een geldig email adres in te voeren');
 
 export const signInSchema = yup.object({
-  email: yup.string().email().required('Email is verplicht'),
+  email: email,
   password: yup.string().required('Password is verplicht'),
 });
 
-export const CreateUserSchema = yup.object({
-  firstName: yup.string().required('Voornaam is verplicht'),
-  lastName: yup.string().required('Achternaam is verplicht'),
-  email: email,
+export const signUpSchema = yup.object({
+  userName: yup.string().required('Naam en familienaam is verplicht'),
+  userEmail: email,
   password: yup
     .string()
-    .required('Password is verplicht')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/,
-      'Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character'
-    ),
-});
-
-export const ValidateUserSchema = yup.object({
-  email: yup.string().email().required('Email is verplicht'),
-  password: yup.string().required('Password is verplicht'),
-});
-
-export const createOrganizationSchema = yup.object({
+    .matches(PASSWORD_REGEX, 'Wachtwoord moet 8 tekens lang zijn'),
+  checkPassword: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Wachtwoorden komen niet overeen'),
   name: yup.string().required('Naam is verplicht'),
-  btwNumber: yup.string().required('BTW nummer is verplicht'),
-  companyNumber: yup.string().required('Ondernemingsnummer is verplicht'),
-  rizv: yup.string().required('RIZV nummer is verplicht'),
-  phone: yup.string().required('Telefoonnummer is verplicht'),
   email: email,
-  street: yup.string().required('Straat is verplicht'),
-  houseNumber: yup.string().required('Huisnummer is verplicht'),
-  zipCode: yup.string().required('Postcode is verplicht'),
-  city: yup.string().required('Plaats is verplicht'),
+  companyNumber: yup
+    .string()
+    .matches(COMPANY_NUMBER_REGEX, 'Ongeldige rekeningnummer')
+    .required('Rekeningnummer is verplicht'),
+  rizivNumber: yup
+    .string()
+    .matches(ZIP_CODE_REGEX, 'Ongeldige postcode')
+    .required('Postcode is verplicht'),
+  address: yup.string().required('Adres is verplicht'),
+  city: yup.string().required('Stad is verplicht'),
+  zipcode: yup
+    .string()
+    .matches(ZIP_CODE_REGEX, 'Ongeldige postcode')
+    .required('Postcode is verplicht'),
 });

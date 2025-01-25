@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 const HomePage = async () => {
-  if (!(await isAuthenticated())) redirect('/sign-in');
+  //if (!(await isAuthenticated())) redirect('/sign-in');
   return (
     <main>
       <p>landing page when user is registered</p>

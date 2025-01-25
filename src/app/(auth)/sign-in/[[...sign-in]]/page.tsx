@@ -1,26 +1,21 @@
 'use client';
 
+import { Form, PasswordField } from '@/components/form';
+import { NAVBAR_HEIGHT } from '@/lib/utils';
 import { signInSchema } from '@/lib/validation';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Box,
   Button,
   Divider,
   FormControl,
   FormHelperText,
-  IconButton,
   TextField,
   Typography,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 const SignInPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const router = useRouter();
   const {
     values,
     handleSubmit,
@@ -39,28 +34,18 @@ const SignInPage = () => {
     onSubmit: (values) => {
       console.log(values);
       resetForm();
-      router.push('/dashboard');
     },
   });
+
   return (
     <main
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh',
+        height: `calc(100vh - ${NAVBAR_HEIGHT})`,
       }}>
-      <Box
-        component='form'
-        onSubmit={handleSubmit}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 3,
-          border: '1px solid black',
-          borderRadius: 2,
-          padding: 4,
-        }}>
+      <Form handleSubmit={handleSubmit}>
         <Box
           sx={{
             display: 'flex',
@@ -88,32 +73,20 @@ const SignInPage = () => {
             error={touched.email && Boolean(errors.email)}
             helperText={touched.email && errors.email}
             placeholder='john@doe.com'
-            autoFocus
           />
         </FormControl>
         <FormControl>
-          <TextField
+          <PasswordField
             id='password'
             name='password'
             required
             variant='standard'
             label='Password'
-            type={showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.password && Boolean(errors.password)}
             helperText={touched.password && errors.password}
-            placeholder='********'
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <IconButton onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                ),
-              },
-            }}
           />
           <FormHelperText sx={{ display: 'flex', justifyContent: 'end' }}>
             <Link href={'/forgot-password'}>Wachtwoord vergeten?</Link>
@@ -131,7 +104,7 @@ const SignInPage = () => {
         <Typography variant='body2' color='textSecondary' align='left'>
           Nog geen account? <Link href={'/sign-up'}>Registreer</Link>
         </Typography>
-      </Box>
+      </Form>
     </main>
   );
 };
