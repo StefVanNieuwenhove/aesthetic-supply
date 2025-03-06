@@ -92,11 +92,11 @@ export const BackOfficeLinks: Link[] = [
     title: 'Bestellingen',
   },
   {
-    href: '/stock',
+    href: '/inventory',
     title: 'Voorraad',
   },
   {
-    href: '/input',
-    title: 'Bedrijven',
+    href: '/customers',
+    title: 'Klanten',
   },
 ];

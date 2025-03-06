@@ -1,11 +1,11 @@
 import { BackOfficeNav } from '@/components';
-import React from 'react';
+import { Container } from '@mui/material';
 
 const BackOfficeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <BackOfficeNav />
-      {children}
+      <Container maxWidth={false}>{children}</Container>
     </>
   );
 };
