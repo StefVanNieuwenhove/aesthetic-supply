@@ -37,4 +37,5 @@ model Organization {
 enum Role {
   ADMIN
   MEMBER
+  BACKOFFICE
 }

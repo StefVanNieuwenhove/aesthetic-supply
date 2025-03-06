@@ -1,40 +1,38 @@
+'use client';
+
 import { AppBar, Avatar, Badge, Box, Toolbar, Typography } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
-import { SidebarTrigger } from './Sidebar';
-import { NAVBAR_HEIGHT } from '@/lib/utils';
+import Sidebar, { SidebarTrigger, useSidebar } from './Sidebar';
 
 const Navbar = () => {
+  const { open } = useSidebar();
   return (
     <>
       <AppBar
-        enableColorOnDark
         position='fixed'
         color='primary'
-        elevation={10}
         sx={{
-          zIndex: 100,
-          top: 0,
-          height: `${NAVBAR_HEIGHT}`,
-          backdropFilter: 'blur(20px)',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          transition: 'margin 1s',
+          marginLeft: open ? 240 : 64,
+          width: `calc(100% - ${open ? 240 : 64}px)`,
         }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <SidebarTrigger />
           </Box>
-          <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-            <Badge
-              badgeContent={4}
-              color='secondary'
-              aria-label='notifications'>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Badge badgeContent={4} color='secondary'>
               <Notifications />
             </Badge>
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Avatar>AS</Avatar>
               <Typography variant='h6'>Gebruiker</Typography>
             </Box>
           </Box>
         </Toolbar>
       </AppBar>
+      <Sidebar />
     </>
   );
 };

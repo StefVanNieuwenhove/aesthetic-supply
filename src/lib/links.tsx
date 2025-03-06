@@ -1,60 +1,68 @@
 import {
   AdminPanelSettings,
+  Dashboard,
+  DomainDisabled,
   FolderCopy,
-  Home,
+  Input,
   Inventory,
+  ManageSearch,
+  Output,
+  QueryStats,
   QuestionAnswer,
-  Receipt,
   ShoppingCart,
-  SwapVert,
 } from '@mui/icons-material';
 import { Link } from './types';
 
 export const Links: Link[] = [
   {
-    href: '/getting-started',
-    title: 'Getting started',
-    icon: <QuestionAnswer />,
-  },
-  {
     href: '/',
     title: 'Dashboard',
-    icon: <Home />,
+    icon: <Dashboard />,
   },
   {
     href: '/orders',
-    title: 'Orders',
+    title: 'Bestellingen',
     icon: <ShoppingCart />,
   },
   {
     href: '/stock',
-    title: 'Stock',
+    title: 'Voorraad',
     icon: <Inventory />,
   },
   {
-    href: '/input-output',
-    title: 'Input/output',
-    icon: <SwapVert />,
+    href: '/input',
+    title: 'Input',
+    icon: <Input />,
+  },
+  {
+    href: '/output',
+    title: 'Output',
+    icon: <Output />,
+  },
+  {
+    href: '/Location-swap',
+    title: 'Locatietransfers',
+    icon: <DomainDisabled />,
   },
   {
     href: '/stocktakes',
     title: 'Stocktakes',
-    icon: <Home />,
+    icon: <Inventory />,
   },
   {
     href: '/facturen',
     title: 'Facturen',
-    icon: <Receipt />,
-  },
-  {
-    href: '/inzichten',
-    title: 'Inzichten',
-    icon: <Home />,
-  },
-  {
-    href: '/documenten',
-    title: 'Documenten',
     icon: <FolderCopy />,
+  },
+  {
+    href: '/data',
+    title: 'Data',
+    icon: <QueryStats />,
+  },
+  {
+    href: '/logs',
+    title: 'Activitietenlogboek',
+    icon: <ManageSearch />,
   },
   {
     href: '/beheer',
@@ -66,5 +74,29 @@ export const Links: Link[] = [
         title: 'Producten',
       },
     ],
+  },
+  {
+    href: '/getting-started',
+    title: 'Getting started',
+    icon: <QuestionAnswer />,
+  },
+];
+
+export const BackOfficeLinks: Link[] = [
+  {
+    href: '/',
+    title: 'Dashboard',
+  },
+  {
+    href: '/orders',
+    title: 'Bestellingen',
+  },
+  {
+    href: '/stock',
+    title: 'Voorraad',
+  },
+  {
+    href: '/input',
+    title: 'Bedrijven',
   },
 ];
