@@ -11,3 +11,10 @@ export type StepData = {
   label: string;
   content: ReactNode;
 };
+
+export type Organization = {
+  id: string;
+  name: string;
+  slug?: string;
+  logo: string;
+};

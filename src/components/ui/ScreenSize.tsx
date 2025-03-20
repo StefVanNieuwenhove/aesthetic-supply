@@ -1,55 +1,64 @@
 'use client';
 
-import { Box, Chip, useTheme, useMediaQuery } from '@mui/material';
+import { useTheme, useMediaQuery, Box, Chip } from '@mui/material';
 
-const ScreenSize = () => {
-  const nodeEnv = process.env.NODE_ENV;
+// Define possible screen size values
+type ScreenSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-  // Define breakpoints with MUI's useMediaQuery
+export const useScreenSize = (): ScreenSize | null => {
   const theme = useTheme();
-  const isSX = useMediaQuery(theme.breakpoints.only('xs'));
+
+  const isXS = useMediaQuery(theme.breakpoints.only('xs'));
   const isSM = useMediaQuery(theme.breakpoints.only('sm'));
   const isMD = useMediaQuery(theme.breakpoints.only('md'));
   const isLG = useMediaQuery(theme.breakpoints.only('lg'));
   const isXL = useMediaQuery(theme.breakpoints.only('xl'));
 
-  // Array of screen sizes with conditions and styles
-  const screenSizes = [
-    { label: 'SX', visible: isSX, color: 'purple' },
-    { label: 'SM', visible: isSM, color: 'teal' },
-    { label: 'MD', visible: isMD, color: 'blue' },
-    { label: 'LG', visible: isLG, color: 'green' },
-    { label: 'XL', visible: isXL, color: 'red' },
-  ];
+  if (isXS) return 'xs';
+  if (isSM) return 'sm';
+  if (isMD) return 'md';
+  if (isLG) return 'lg';
+  if (isXL) return 'xl';
 
-  if (nodeEnv === 'production') return null;
+  return null; // Return null if no match is found
+};
+
+const ScreenSize = () => {
+  const nodeEnv = process.env.NODE_ENV;
+  const screenSize = useScreenSize();
+
+  const screenSizes: Record<ScreenSize, { label: string; color: string }> = {
+    xs: { label: 'XS', color: 'purple' },
+    sm: { label: 'SM', color: 'teal' },
+    md: { label: 'MD', color: 'blue' },
+    lg: { label: 'LG', color: 'green' },
+    xl: { label: 'XL', color: 'red' },
+  };
+
+  if (nodeEnv === 'production' || !screenSize) return null;
+
+  const screenData = screenSizes[screenSize];
 
   return (
     <Box
       sx={{
         position: 'fixed',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
+        bottom: 16,
+        right: 16,
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing(1),
+        gap: 1,
       }}>
-      {screenSizes.map(
-        ({ label, visible, color }) =>
-          visible && (
-            <Chip
-              key={label}
-              label={label}
-              sx={{
-                backgroundColor: color,
-                color: 'white',
-                padding: theme.spacing(1),
-                fontSize: theme.typography.body2.fontSize,
-                fontWeight: 'bold',
-              }}
-            />
-          )
-      )}
+      <Chip
+        label={screenData.label}
+        sx={{
+          backgroundColor: screenData.color,
+          color: 'white',
+          padding: 1,
+          fontSize: '0.875rem',
+          fontWeight: 'bold',
+        }}
+      />
     </Box>
   );
 };

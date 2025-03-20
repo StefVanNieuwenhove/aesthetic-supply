@@ -3,6 +3,7 @@
 import { Form, PasswordField } from '@/components/form';
 import { NAVBAR_HEIGHT } from '@/lib/utils';
 import { signInSchema } from '@/lib/validation';
+import { SignIn } from '@clerk/nextjs';
 import {
   Box,
   Button,
@@ -45,7 +46,8 @@ const SignInPage = () => {
         justifyContent: 'center',
         height: `calc(100vh - ${NAVBAR_HEIGHT})`,
       }}>
-      <Form handleSubmit={handleSubmit}>
+      <SignIn />
+      {/* <Form handleSubmit={handleSubmit}>
         <Box
           sx={{
             display: 'flex',
@@ -104,7 +106,7 @@ const SignInPage = () => {
         <Typography variant='body2' color='textSecondary' align='left'>
           Nog geen account? <Link href={'/sign-up'}>Registreer</Link>
         </Typography>
-      </Form>
+      </Form> */}
     </main>
   );
 };

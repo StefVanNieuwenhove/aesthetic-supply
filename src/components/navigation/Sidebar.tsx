@@ -4,6 +4,7 @@ import { Links } from '@/lib/links';
 import {
   FormatIndentDecrease,
   FormatIndentIncrease,
+  HolidayVillage,
 } from '@mui/icons-material';
 //import { SidebarContext } from '@/lib/types';
 import {
@@ -25,6 +26,8 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { OrganizationSwitcher, useOrganization } from '@clerk/nextjs';
+import Image from 'next/image';
 
 type SidebarContext = {
   open: boolean;
@@ -77,6 +80,7 @@ export const SidebarTrigger = () => {
 
 const Sidebar = () => {
   const { open } = useSidebar();
+  const { organization, isLoaded } = useOrganization();
 
   return (
     <>
@@ -84,24 +88,57 @@ const Sidebar = () => {
         variant='permanent'
         open={open}
         sx={{
-          width: open ? 240 : 64,
+          width: open ? 240 : 70,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: open ? 240 : 64,
+            width: open ? 240 : 70,
             transition: 'width 0.3s',
             overflowX: 'hidden',
           },
         }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+          }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 1,
+            }}>
             <Avatar
               sx={{
                 width: 64,
                 height: 64,
                 margin: '16px auto',
               }}>
-              AS
+              {isLoaded && organization ? (
+                <Image
+                  src={organization?.imageUrl}
+                  alt={organization?.name}
+                  width={64}
+                  height={64}
+                />
+              ) : (
+                <Avatar>
+                  <HolidayVillage />
+                </Avatar>
+              )}
             </Avatar>
+            {open && (
+              <OrganizationSwitcher
+                hidePersonal
+                afterSelectOrganizationUrl={'/:slug/dashboard'}
+                appearance={{
+                  elements: {
+                    width: '100%',
+                  },
+                }}
+              />
+            )}
           </Box>
           <Divider />
           <List>

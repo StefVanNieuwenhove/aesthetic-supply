@@ -2,6 +2,7 @@
 
 import { Form, PasswordField } from '@/components/form';
 import { signUpSchema } from '@/lib/validation';
+import { SignUp } from '@clerk/nextjs';
 import {
   Box,
   Button,
@@ -51,7 +52,8 @@ const SignUpPage = () => {
         justifyContent: 'center',
         //height: `calc(100vh - ${NAVBAR_HEIGHT})`,
       }}>
-      <Form handleSubmit={handleSubmit}>
+      <SignUp />
+      {/* <Form handleSubmit={handleSubmit}>
         <Box>
           <Typography variant='h4' align='center'>
             Maak account bij Aesthetic Supply
@@ -270,7 +272,7 @@ const SignUpPage = () => {
             Submit
           </Button>
         </Box>
-      </Form>
+      </Form> */}
     </main>
   );
 };

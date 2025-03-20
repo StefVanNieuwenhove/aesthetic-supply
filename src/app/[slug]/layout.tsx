@@ -1,20 +1,20 @@
+import { ReactNode } from 'react';
 import { Navbar } from '@/components';
 import { SidebarProvider } from '@/components/navigation/Sidebar';
-import { ReactNode } from 'react';
 
-type DashboardLayoutProps = Readonly<{
+type Props = {
   children: ReactNode;
-}>;
+};
 
-const Dashboardlayout = ({ children }: DashboardLayoutProps) => {
+const OrganizationRootLayout = ({ children }: Props) => {
   return (
-    <>
+    <main>
       <SidebarProvider>
         <Navbar />
       </SidebarProvider>
       {children}
-    </>
+    </main>
   );
 };
 
-export default Dashboardlayout;
+export default OrganizationRootLayout;
